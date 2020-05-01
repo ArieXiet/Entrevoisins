@@ -32,9 +32,6 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
     private final List<Neighbour> mNeighbours;
     private final Context mContext;
 
-
-
-
     static final int DETAILS_ACTIVITY_REQUEST_CODE = 22;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -60,8 +57,6 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         }
 
     }
-
-
 
     MyNeighbourRecyclerViewAdapter(List<Neighbour> items, Context context) {
         mNeighbours = items;

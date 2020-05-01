@@ -1,5 +1,6 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -65,6 +66,7 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
 
 
 
+	@SuppressLint("SetTextI18n")
 	private void init() {
 		if (mNeighbour.isFavorite()) {
 			Glide.with(this).load(R.drawable.ic_star_black_24dp).into(mFab);
@@ -77,6 +79,8 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
 		mAddressText.setText(mNeighbour.getAddress());
 		mPhoneText.setText(mNeighbour.getPhoneNumber());
 		mAboutLong.setText(mNeighbour.getAboutMe());
+		String mNameLower = mNeighbour.getName().toLowerCase();
+		mWebText.setText("www.facebook.fr/" + mNameLower);
 		Glide.with(this).load(R.drawable.ic_location).into(mAddressImage);
 		Glide.with(this).load(R.drawable.ic_phone).into(mPhoneImage);
 		Glide.with(this).load(R.drawable.ic_web).into(mWebImage);
@@ -92,7 +96,6 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
 			Glide.with(this).load(R.drawable.ic_star_grey).into(mFab);
 			mFavorite = false;
 		}
-		mNeighbour.setFavorite(mFavorite);
 	}
 
 	@OnClick(R.id.imageBack)
@@ -102,6 +105,4 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
 		setResult(RESULT_OK, mIntent);
 		finish();
 	}
-
-
 }
