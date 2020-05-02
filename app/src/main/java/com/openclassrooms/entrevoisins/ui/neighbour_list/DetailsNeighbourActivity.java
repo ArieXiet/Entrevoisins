@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
 
 	private static final String BUNDLE_EXTRA_FAVORITE = "BUNDLE_EXTRA_FAVORITE";
 	private static final String BUNDLE_EXTRA_NEIGHBOUR = "BUNDLE_EXTRA_NEIGHBOUR";
+	private static final String TAG = "DetailsNeighbourActivit";
 	@BindView(R.id.imageView)
 	ImageView mImageView;
 	@BindView(R.id.firstnameBig)

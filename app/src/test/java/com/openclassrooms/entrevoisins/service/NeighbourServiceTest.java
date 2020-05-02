@@ -11,15 +11,11 @@ import org.junit.runners.JUnit4;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
-import static com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator.DUMMY_FAVORITES;
 import static com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
-import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Unit test on Neighbour service
@@ -54,27 +50,13 @@ public class NeighbourServiceTest {
         Neighbour newNeighbour = new Neighbour(22, "Joe", "https://i.pravatar.cc/150?u="+ System.currentTimeMillis(), "10 rue du lac", "060606060606", "c'est moi", false );
         service.createNeighbour(newNeighbour);
         assertEquals(service.getNeighbours().size(), sizeCount +1);
-    }
-
-    @Test
-    public void detailsMatchNeighbour() {
-        Neighbour neighbourToTest = service.getNeighbours().get(0);
-        assertTrue(DUMMY_NEIGHBOURS.stream().map(Neighbour::getName).collect(Collectors.toList()).contains(neighbourToTest.getName()));
-        assertTrue(DUMMY_NEIGHBOURS.stream().map(Neighbour::getPhoneNumber).collect(Collectors.toList()).contains(neighbourToTest.getPhoneNumber()));
-        assertTrue(DUMMY_NEIGHBOURS.stream().map(Neighbour::getId).collect(Collectors.toList()).contains(neighbourToTest.getId()));
-        assertTrue(DUMMY_NEIGHBOURS.stream().map(Neighbour::getAboutMe).collect(Collectors.toList()).contains(neighbourToTest.getAboutMe()));
-        assertTrue(DUMMY_NEIGHBOURS.stream().map(Neighbour::getAddress).collect(Collectors.toList()).contains(neighbourToTest.getAddress()));
-        assertTrue(DUMMY_NEIGHBOURS.stream().map(Neighbour::getAvatarUrl).collect(Collectors.toList()).contains(neighbourToTest.getAvatarUrl()));
-    }
-
-    @Test
-    public void FavoriteTabOnlyContainsFavorites() {
-        List<Neighbour> favoritesActual = service.getFavorites();
-        for (Neighbour in : favoritesActual) {
-            assertTrue(in.isFavorite());
-        }
-
-        assertThat(favoritesActual, containsInAnyOrder(Objects.requireNonNull(DUMMY_FAVORITES.toArray())));
+        Neighbour neighbourTest = service.getNeighbours().get(service.getNeighbours().size() - 1);
+        assertEquals(neighbourTest.getId(), 22);
+        assertEquals(neighbourTest.getName(), "Joe");
+        assertEquals(neighbourTest.getAddress(), "10 rue du lac");
+        assertEquals(neighbourTest.getPhoneNumber(), "060606060606");
+        assertEquals(neighbourTest.getAboutMe(), "c'est moi");
+        assertFalse(neighbourTest.isFavorite());
     }
 
     @Test
