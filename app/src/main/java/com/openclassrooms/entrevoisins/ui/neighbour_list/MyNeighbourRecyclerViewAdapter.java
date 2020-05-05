@@ -1,6 +1,5 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -32,8 +31,6 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
     private final List<Neighbour> mNeighbours;
     private final Context mContext;
 
-    static final int DETAILS_ACTIVITY_REQUEST_CODE = 22;
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_list_avatar)
         public ImageView mNeighbourAvatar;
@@ -48,14 +45,10 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             ButterKnife.bind(this, view);
             view.setOnClickListener(v -> {
                 Intent intent = new Intent(view.getContext(), DetailsNeighbourActivity.class);
-
                 intent.putExtra("neighbour", mNeighbours.get(getAdapterPosition()));
-
-                ((Activity)mContext).startActivityForResult(intent, DETAILS_ACTIVITY_REQUEST_CODE);
-
+                mContext.startActivity(intent);
             });
         }
-
     }
 
     MyNeighbourRecyclerViewAdapter(List<Neighbour> items, Context context) {
@@ -87,11 +80,4 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
     public int getItemCount() {
         return mNeighbours.size();
     }
-
-
-
-
-
-
-
 }
