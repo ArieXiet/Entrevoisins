@@ -92,5 +92,4 @@ public class FavoriteFragment extends Fragment {
 		mApiService.deleteNeighbour(event.neighbour);
 		initList();
 	}
-
 }
