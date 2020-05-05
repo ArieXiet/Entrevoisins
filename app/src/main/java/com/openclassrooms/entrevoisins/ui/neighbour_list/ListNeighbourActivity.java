@@ -1,19 +1,12 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 
 import com.openclassrooms.entrevoisins.R;
-import com.openclassrooms.entrevoisins.di.DI;
-import com.openclassrooms.entrevoisins.model.Neighbour;
-
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,9 +21,6 @@ public class ListNeighbourActivity extends AppCompatActivity {
     Toolbar mToolbar;
     @BindView(R.id.container)
     ViewPager mViewPager;
-
-    private static final String TAG = "ListNeighbourActivity";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,23 +40,4 @@ public class ListNeighbourActivity extends AppCompatActivity {
     void addNeighbour() {
         AddNeighbourActivity.navigate(this);
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "DEBUG: onActivityResult");
-        Log.d(TAG, "DEBUG: onActivityResult" + resultCode);
-
-
-        if (resultCode == RESULT_OK) {
-
-            if (requestCode == MyNeighbourRecyclerViewAdapter.DETAILS_ACTIVITY_REQUEST_CODE) {
-                Neighbour neighbour = (Neighbour) Objects.requireNonNull(data).getSerializableExtra("BUNDLE_EXTRA_NEIGHBOUR");
-                boolean favorite = data.getBooleanExtra("BUNDLE_EXTRA_FAVORITE", false);
-                DI.getNeighbourApiService().changeFavorite(neighbour, favorite);
-                Log.d(TAG, "DEBUG: " + neighbour.toString());
-            }
-        }
-    }
-
 }
