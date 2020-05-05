@@ -32,7 +32,6 @@ class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
                 fragment = FavoriteFragment.newInstance();
                 break;
         }
-        
         return fragment;
     }
 
