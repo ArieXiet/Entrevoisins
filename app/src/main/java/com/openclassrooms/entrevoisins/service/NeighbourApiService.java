@@ -32,5 +32,4 @@ public interface NeighbourApiService {
     void changeFavorite(Neighbour neighbour, boolean favorite);
 
     List getFavorites();
-
 }
