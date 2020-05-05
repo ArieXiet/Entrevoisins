@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
 import butterknife.BindView;
@@ -18,10 +18,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class DetailsNeighbourActivity extends AppCompatActivity {
-
-	private static final String BUNDLE_EXTRA_FAVORITE = "BUNDLE_EXTRA_FAVORITE";
-	private static final String BUNDLE_EXTRA_NEIGHBOUR = "BUNDLE_EXTRA_NEIGHBOUR";
-	private static final String TAG = "DetailsNeighbourActivit";
 	@BindView(R.id.imageView)
 	ImageView mImageView;
 	@BindView(R.id.firstnameBig)
@@ -45,10 +41,8 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
 	@BindView(R.id.fab1)
 	FloatingActionButton mFab;
 
-	private Intent mIntent;
 	private boolean mFavorite = false;
 	private Neighbour mNeighbour;
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +50,13 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_details_neighbour);
 		ButterKnife.bind(this);
 
-
-		mIntent = getIntent();
-		mNeighbour = (Neighbour) mIntent.getSerializableExtra("neighbour");
+		Intent intent = getIntent();
+		mNeighbour = (Neighbour) intent.getSerializableExtra("neighbour");
 		mFavorite = mNeighbour.isFavorite();
 
 		init();
-
 	}
 
-
-
-
-	@SuppressLint("SetTextI18n")
 	private void init() {
 		if (mNeighbour.isFavorite()) {
 			Glide.with(this).load(R.drawable.ic_star_black_24dp).into(mFab);
@@ -86,7 +74,6 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
 		Glide.with(this).load(R.drawable.ic_location).into(mAddressImage);
 		Glide.with(this).load(R.drawable.ic_phone).into(mPhoneImage);
 		Glide.with(this).load(R.drawable.ic_web).into(mWebImage);
-
 	}
 
 	@OnClick(R.id.fab1)
@@ -98,13 +85,11 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
 			Glide.with(this).load(R.drawable.ic_star_grey).into(mFab);
 			mFavorite = false;
 		}
+		DI.getNeighbourApiService().changeFavorite(mNeighbour, mFavorite);
 	}
 
 	@OnClick(R.id.imageBack)
 	void backActivity () {
-		mIntent.putExtra(BUNDLE_EXTRA_FAVORITE, mFavorite);
-		mIntent.putExtra(BUNDLE_EXTRA_NEIGHBOUR, mNeighbour);
-		setResult(RESULT_OK, mIntent);
 		finish();
 	}
 }
