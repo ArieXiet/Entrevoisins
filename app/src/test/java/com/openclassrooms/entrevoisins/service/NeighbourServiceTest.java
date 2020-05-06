@@ -30,6 +30,9 @@ public class NeighbourServiceTest {
         service = DI.getNewInstanceApiService();
     }
 
+    /**
+     * teste si la méthode getNeighbours renvoie bien une liste contenant tous les voisins de DUMMY_NEIGHBOURS
+     */
     @Test
     public void getNeighboursWithSuccess() {
         List<Neighbour> neighbours;
@@ -37,6 +40,9 @@ public class NeighbourServiceTest {
         assertThat(neighbours, IsIterableContainingInAnyOrder.containsInAnyOrder(Objects.requireNonNull(DUMMY_NEIGHBOURS.toArray())));
     }
 
+    /**
+     * teste si la méthode deleteNeighbour supprime bien un voisin de la liste
+     */
     @Test
     public void deleteNeighbourWithSuccess() {
         Neighbour neighbourToDelete = service.getNeighbours().get(0);
@@ -44,6 +50,9 @@ public class NeighbourServiceTest {
         assertFalse(service.getNeighbours().contains(neighbourToDelete));
     }
 
+    /**
+     * teste si l'ajout de voisin rajoute bien un élément à la liste et si les détails stockés sont bien les bons
+     */
     @Test
     public void addNeighbourWithSuccess() {
         int sizeCount = service.getNeighbours().size();
@@ -59,6 +68,9 @@ public class NeighbourServiceTest {
         assertFalse(neighbourTest.isFavorite());
     }
 
+    /**
+     * teste si l'ajout d'un voisin au favoris ajoute bien un élément à la liste de favoris
+     */
     @Test
     public void addFavoriteWithSuccess() {
         int countFav = service.getFavorites().size();
@@ -66,10 +78,13 @@ public class NeighbourServiceTest {
         assertEquals(service.getFavorites().size(), countFav + 1);
     }
 
+    /**
+     * teste si le fait d'enlevé la mention favoris à un voisin enlève bien un élément à la liste des favoris
+     */
     @Test
     public void removeFavoriteWithSuccess() {
         int countFav = service.getFavorites().size();
-        Neighbour neighbour = (Neighbour) service.getFavorites().get(0);
+        Neighbour neighbour = service.getFavorites().get(0);
         neighbour.setFavorite(false);
         assertEquals(service.getFavorites().size(), countFav - 1);
     }

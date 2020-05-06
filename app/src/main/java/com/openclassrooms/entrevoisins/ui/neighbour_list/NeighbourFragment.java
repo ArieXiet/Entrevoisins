@@ -22,12 +22,10 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.List;
 import java.util.Objects;
 
-
 public class NeighbourFragment extends Fragment {
 
     private NeighbourApiService mApiService;
     private RecyclerView mRecyclerView;
-
 
     /**
      * Create and return a new instance

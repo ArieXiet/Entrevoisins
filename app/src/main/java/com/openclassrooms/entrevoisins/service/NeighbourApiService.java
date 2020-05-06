@@ -2,9 +2,7 @@ package com.openclassrooms.entrevoisins.service;
 
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
-import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * Neighbour API client
@@ -31,5 +29,5 @@ public interface NeighbourApiService {
 
     void changeFavorite(Neighbour neighbour, boolean favorite);
 
-    List getFavorites();
+    List<Neighbour> getFavorites();
 }

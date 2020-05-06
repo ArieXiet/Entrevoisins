@@ -38,8 +38,6 @@ import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAsserti
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.core.IsNull.notNullValue;
 
-
-
 /**
  * Test class for list of neighbours
  */
@@ -49,7 +47,6 @@ public class NeighboursListTest {
     @Rule
     public final ActivityTestRule<ListNeighbourActivity> mActivityRule =
             new ActivityTestRule<>(ListNeighbourActivity.class);
-
 
     @Before
     public void setUp() {
@@ -84,8 +81,6 @@ public class NeighboursListTest {
         };
     }
 
-
-
     /**
      * We ensure that our recyclerview is displaying at least on item
      */
@@ -119,11 +114,10 @@ public class NeighboursListTest {
     public void myNeighboursList_clickAction_shouldStartDetails() {
         onView(ViewMatchers.withId(R.id.list_neighbours)).perform(RecyclerViewActions.actionOnItemAtPosition(0, new ClickViewAction()));
         onView(ViewMatchers.withId(R.id.detailsActivity)).check(matches(isDisplayed()));
-
     }
 
     /**
-     * When details screen start, the name of the text view should be the neighbour name
+     * When details activity start, the name in the text view should be the neighbour's name
      */
     @Test
     public void detailsActivity_nameTextView_shouldBeNeighbourName() {

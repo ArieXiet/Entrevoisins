@@ -26,6 +26,7 @@ public class Neighbour implements Serializable {
     /** About me */
     private String aboutMe;
 
+    /** Favorite */
     private boolean favorite;
 
     /**

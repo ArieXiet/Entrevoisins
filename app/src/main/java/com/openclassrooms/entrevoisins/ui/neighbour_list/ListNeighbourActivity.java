@@ -33,7 +33,6 @@ public class ListNeighbourActivity extends AppCompatActivity {
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-
     }
 
     @OnClick(R.id.add_neighbour)

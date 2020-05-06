@@ -28,14 +28,11 @@ public class FavoriteFragment extends Fragment {
 	private RecyclerView mRecyclerView;
 	private NeighbourApiService mApiService;
 
-
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
 	 * fragment (e.g. upon screen orientation changes).
 	 */
-	public FavoriteFragment() {
-	}
-
+	public FavoriteFragment() {}
 
 	public static FavoriteFragment newInstance() {
 		return new FavoriteFragment();

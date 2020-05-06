@@ -39,7 +39,6 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
 
-
         ViewHolder(@NonNull View view) {
             super(view);
             ButterKnife.bind(this, view);

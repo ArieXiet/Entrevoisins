@@ -12,7 +12,6 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
 
     private final List<Neighbour> neighbours = DummyNeighbourGenerator.generateNeighbours();
 
-
     /**
      * {@inheritDoc}
      */
@@ -38,10 +37,6 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
         neighbours.add(neighbour);
     }
 
-    public void changeFavorite(Neighbour neighbour, boolean favorite) {
-        neighbours.get(neighbours.indexOf(neighbour)).setFavorite(favorite);
-    }
-
     @Override
     public List<Neighbour> getFavorites() {
         List<Neighbour> favorites = new ArrayList<>();
@@ -51,5 +46,9 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
                 favorites.add(in);
         }
         return favorites;
+    }
+
+    public void changeFavorite(Neighbour neighbour, boolean favorite) {
+        neighbours.get(neighbours.indexOf(neighbour)).setFavorite(favorite);
     }
 }
