@@ -17,6 +17,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.support.design.widget.CoordinatorLayout.Behavior.setTag;
+
 public class DetailsNeighbourActivity extends AppCompatActivity {
 	@BindView(R.id.imageView)
 	ImageView mImageView;
@@ -41,15 +43,17 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
 	@BindView(R.id.fab1)
 	FloatingActionButton mFab;
 
-	private boolean mFavorite = false;
 	private Neighbour mNeighbour;
+	private boolean mFavorite = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// on lie l'activity au layout
 		setContentView(R.layout.activity_details_neighbour);
 		ButterKnife.bind(this);
 
+		// on récupère l'intent et les informations attachées
 		Intent intent = getIntent();
 		mNeighbour = (Neighbour) intent.getSerializableExtra("neighbour");
 		mFavorite = mNeighbour.isFavorite();
@@ -58,22 +62,23 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
 	}
 
 	private void init() {
-		if (mNeighbour.isFavorite()) {
-			Glide.with(this).load(R.drawable.ic_star_black_24dp).into(mFab);
-		}else {
-			Glide.with(this).load(R.drawable.ic_star_grey).into(mFab);
-		}
+		// on gère l'affichage de chaque vue
 		Glide.with(this).load(mNeighbour.getAvatarUrl()).into(mImageView);
 		mFirstname.setText(mNeighbour.getName());
 		mFirstnameBig.setText(mNeighbour.getName());
 		mAddressText.setText(mNeighbour.getAddress());
 		mPhoneText.setText(mNeighbour.getPhoneNumber());
-		mAboutLong.setText(mNeighbour.getAboutMe());
 		String mNameLower = mNeighbour.getName().toLowerCase();
 		mWebText.setText("www.facebook.fr/" + mNameLower);
 		Glide.with(this).load(R.drawable.ic_location).into(mAddressImage);
 		Glide.with(this).load(R.drawable.ic_phone).into(mPhoneImage);
 		Glide.with(this).load(R.drawable.ic_web).into(mWebImage);
+		mAboutLong.setText(mNeighbour.getAboutMe());
+		if (mNeighbour.isFavorite()) {
+			Glide.with(this).load(R.drawable.ic_star_black_24dp).into(mFab);
+		}else {
+			Glide.with(this).load(R.drawable.ic_star_grey).into(mFab);
+		}
 	}
 
 	@OnClick(R.id.fab1)

@@ -82,7 +82,7 @@ public class NeighboursListTest {
     }
 
     /**
-     * We ensure that our recyclerview is displaying at least on item
+     * We ensure that our recyclerview is displaying at least one item
      */
     @Test
     public void myNeighboursList_shouldNotBeEmpty() {
@@ -112,7 +112,8 @@ public class NeighboursListTest {
      */
     @Test
     public void myNeighboursList_clickAction_shouldStartDetails() {
-        onView(ViewMatchers.withId(R.id.list_neighbours)).perform(RecyclerViewActions.actionOnItemAtPosition(0, new ClickViewAction()));
+        onView(ViewMatchers.withId(R.id.list_neighbours))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, new ClickViewAction()));
         onView(ViewMatchers.withId(R.id.detailsActivity)).check(matches(isDisplayed()));
     }
 
@@ -124,7 +125,6 @@ public class NeighboursListTest {
         String mName = DI.getNeighbourApiService().getNeighbours().get(0).getName();
         onView(ViewMatchers.withId(R.id.list_neighbours)).perform(RecyclerViewActions.actionOnItemAtPosition(0, new ClickViewAction()));
         onView(ViewMatchers.withId(R.id.firstname)).check(matches(withText(mName)));
-
     }
 
     /**
@@ -133,11 +133,10 @@ public class NeighboursListTest {
     @Test
     public void myFavoriteList_contains_favoriteNeighbours() {
         List<Neighbour> mFavorites = DI.getNeighbourApiService().getFavorites();
-        int mFavSize = mFavorites.size();
-        int mCounter = 0;
         onView(ViewMatchers.withId(R.id.tabs)).perform(selectTabAtPosition(1));
-        onView(ViewMatchers.withId(R.id.list_favorites)).check(matches(hasMinimumChildCount(mFavSize)));
+        onView(ViewMatchers.withId(R.id.list_favorites)).check(matches(hasMinimumChildCount(mFavorites.size())));
 
+        int mCounter = 0;
         for (Neighbour in : mFavorites) {
             onView(ViewMatchers.withId(R.id.list_favorites)).perform(RecyclerViewActions.actionOnItemAtPosition(mCounter, new ClickViewAction()));
             onView(ViewMatchers.withId(R.id.firstname)).check(matches(withText(in.getName())));

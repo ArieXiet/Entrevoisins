@@ -37,4 +37,14 @@ abstract class DummyNeighbourGenerator {
     static List<Neighbour> generateNeighbours() {
         return new ArrayList<>(DUMMY_NEIGHBOURS);
     }
+
+    static List<Neighbour> favoriteNeighbours() {
+        List<Neighbour> favorites = new ArrayList<>();
+        for(Neighbour in: DUMMY_NEIGHBOURS
+        ) {
+            if (in.isFavorite())
+                favorites.add(in);
+        }
+        return favorites;
+    }
 }

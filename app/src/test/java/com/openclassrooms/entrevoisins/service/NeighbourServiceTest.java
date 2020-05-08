@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
+import static com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator.favoriteNeighbours;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
@@ -84,8 +85,16 @@ public class NeighbourServiceTest {
     @Test
     public void removeFavoriteWithSuccess() {
         int countFav = service.getFavorites().size();
-        Neighbour neighbour = service.getFavorites().get(0);
-        neighbour.setFavorite(false);
+        service.getFavorites().get(0).setFavorite(false);
         assertEquals(service.getFavorites().size(), countFav - 1);
+    }
+
+    @Test
+    public void getFavoritesWithSuccess() {
+        List<Neighbour> favorites;
+        favorites = service.getFavorites();
+        List<Neighbour> favoritesExpected = favoriteNeighbours();
+
+        assertThat(favorites, IsIterableContainingInAnyOrder.containsInAnyOrder(Objects.requireNonNull(favoritesExpected)));
     }
 }
