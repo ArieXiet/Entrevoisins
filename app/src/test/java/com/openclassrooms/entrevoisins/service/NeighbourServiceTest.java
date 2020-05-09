@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
-import static com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator.favoriteNeighbours;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
