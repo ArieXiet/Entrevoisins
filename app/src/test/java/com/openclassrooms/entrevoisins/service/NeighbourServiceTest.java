@@ -25,10 +25,12 @@ import static org.junit.Assert.assertThat;
 public class NeighbourServiceTest {
 
     private NeighbourApiService service;
+    private Neighbour newNeighbour;
 
     @Before
     public void setup() {
         service = DI.getNewInstanceApiService();
+        newNeighbour = new Neighbour(22, "Joe", "https://i.pravatar.cc/150?u="+ System.currentTimeMillis(), "10 rue du lac", "060606060606", "c'est moi", false );
     }
 
     /**
@@ -52,15 +54,24 @@ public class NeighbourServiceTest {
     }
 
     /**
-     * teste si l'ajout de voisin rajoute bien un élément à la liste et si les détails stockés sont bien les bons
+     * teste si l'ajout de voisin rajoute bien un élément à la liste
      */
     @Test
     public void addNeighbourWithSuccess() {
         int sizeCount = service.getNeighbours().size();
-        Neighbour newNeighbour = new Neighbour(22, "Joe", "https://i.pravatar.cc/150?u="+ System.currentTimeMillis(), "10 rue du lac", "060606060606", "c'est moi", false );
         service.createNeighbour(newNeighbour);
         assertEquals(service.getNeighbours().size(), sizeCount +1);
-        Neighbour neighbourTest = service.getNeighbours().get(service.getNeighbours().size() - 1);
+
+    }
+
+    /**
+     * teste di les détails stockés lorsqu'on ajoute un voisin sont les bons
+     */
+    @Test
+    public void NewNeighbourDetailsMatches() {
+        service.createNeighbour(newNeighbour);
+        int indexNeighbour = service.getNeighbours().indexOf(newNeighbour);
+        Neighbour neighbourTest = service.getNeighbours().get(indexNeighbour);
         assertEquals(neighbourTest.getId(), 22);
         assertEquals(neighbourTest.getName(), "Joe");
         assertEquals(neighbourTest.getAddress(), "10 rue du lac");
@@ -87,14 +98,5 @@ public class NeighbourServiceTest {
         int countFav = service.getFavorites().size();
         service.getFavorites().get(0).setFavorite(false);
         assertEquals(service.getFavorites().size(), countFav - 1);
-    }
-
-    @Test
-    public void getFavoritesWithSuccess() {
-        List<Neighbour> favorites;
-        favorites = service.getFavorites();
-        List<Neighbour> favoritesExpected = favoriteNeighbours();
-
-        assertThat(favorites, IsIterableContainingInAnyOrder.containsInAnyOrder(Objects.requireNonNull(favoritesExpected)));
     }
 }
