@@ -80,12 +80,21 @@ public class NeighbourServiceTest {
     }
 
     /**
+     * teste si la méthode changeFavorite fonctionne correctement
+     */
+    @Test
+    public void changeFavoriteWithSuccess() {
+        service.changeFavorite(service.getNeighbours().get(0), true);
+        assertEquals(service.getNeighbours().get(0).isFavorite(), true);
+    }
+
+    /**
      * teste si l'ajout d'un voisin au favoris ajoute bien un élément à la liste de favoris
      */
     @Test
     public void addFavoriteWithSuccess() {
         int countFav = service.getFavorites().size();
-        service.getNeighbours().get(0).setFavorite(true);
+        service.changeFavorite(service.getNeighbours().get(0), true);
         assertEquals(service.getFavorites().size(), countFav + 1);
     }
 
@@ -95,7 +104,8 @@ public class NeighbourServiceTest {
     @Test
     public void removeFavoriteWithSuccess() {
         int countFav = service.getFavorites().size();
-        service.getFavorites().get(0).setFavorite(false);
+        service.changeFavorite(service.getFavorites().get(0), false);
         assertEquals(service.getFavorites().size(), countFav - 1);
     }
+
 }
