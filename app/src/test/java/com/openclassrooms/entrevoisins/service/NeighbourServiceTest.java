@@ -16,6 +16,7 @@ import static com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator.DU
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit test on Neighbour service
@@ -86,7 +87,7 @@ public class NeighbourServiceTest {
     public void changeFavoriteWithSuccess() {
         service.getNeighbours().get(0).setFavorite(false);
         service.changeFavorite(service.getNeighbours().get(0), true);
-        assertEquals(service.getNeighbours().get(0).isFavorite(), true);
+        assertTrue(service.getNeighbours().get(0).isFavorite());
     }
 
     /**
