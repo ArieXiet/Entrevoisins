@@ -84,6 +84,7 @@ public class NeighbourServiceTest {
      */
     @Test
     public void changeFavoriteWithSuccess() {
+        service.getNeighbours().get(0).setFavorite(false);
         service.changeFavorite(service.getNeighbours().get(0), true);
         assertEquals(service.getNeighbours().get(0).isFavorite(), true);
     }
